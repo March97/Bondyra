@@ -5,11 +5,6 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
-import com.example.bondyra.objects.Order;
-import com.example.bondyra.objects.OrderRepository;
 
 import java.util.List;
 

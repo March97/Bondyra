@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bondyra.R;
-import com.example.bondyra.objects.Order;
 
 import java.util.ArrayList;
 import java.util.List;

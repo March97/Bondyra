@@ -1,10 +1,15 @@
-package com.example.bondyra.objects;
+package com.example.bondyra.ui.orders;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.sql.Time;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Entity(tableName = "order_table")
 public class Order {
@@ -20,6 +25,18 @@ public class Order {
     private int numberOfTable;
     private double cost;
     private String status;
+
+    @Ignore
+    public Order(String dishes, int numberOfTable) {
+        this.dishes = dishes;
+        this.numberOfTable = numberOfTable;
+
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        Date date = new Date();
+        this.timeOfPlaced = formatter.format(date);
+        this.cost = 12.0;
+        this.status = "Active";
+    }
 
     public Order(String dishes, String timeOfPlaced, int numberOfTable, double cost, String status) {
         this.dishes = dishes;

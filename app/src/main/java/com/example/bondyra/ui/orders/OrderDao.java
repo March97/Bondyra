@@ -1,4 +1,4 @@
-package com.example.bondyra.objects;
+package com.example.bondyra.ui.orders;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -24,6 +24,6 @@ public interface OrderDao {
     @Query("DELETE FROM order_table")
     void deleteAllOrders();
 
-    @Query("SELECT * FROM order_table ORDER BY timeOfPlaced DESC")
+    @Query("SELECT * FROM order_table ORDER BY id")
     LiveData<List<Order>> getAllOrders();
 }

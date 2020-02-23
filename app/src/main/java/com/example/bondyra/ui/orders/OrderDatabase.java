@@ -1,4 +1,4 @@
-package com.example.bondyra.objects;
+package com.example.bondyra.ui.orders;
 
 import android.content.Context;
 import android.os.AsyncTask;
