@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/id_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/table_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Table: 1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/id_tv"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/status_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Satus: "
+            android:maxLines="1"
+            android:layout_below="@id/table_tv"/>
+
+        <TextView
+            android:id="@+id/time_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time of placed: 12.00"
+            android:maxLines="1"
+            android:layout_below="@id/status_tv"/>
+
+        <TextView
+            android:id="@+id/dish_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dish: "
+            android:layout_below="@id/time_tv"/>
+
+        <TextView
+            android:id="@+id/cost_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/id_tv"
+            android:text="cost: 1"
+            android:maxLines="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    </RelativeLayout>
+</LinearLayout>
