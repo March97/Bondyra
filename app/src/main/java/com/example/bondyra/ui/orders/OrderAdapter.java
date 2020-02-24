@@ -16,6 +16,8 @@ import java.util.List;
 public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder> {
 
     private List<Order> orders = new ArrayList<>();
+    private OnItemClickListener listener;
+
     @NonNull
     @Override
     public OrderHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -31,7 +33,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         holder.timeOfPlaced_tv.setText("Time of placed: " + currentOrder.getTimeOfPlaced());
         holder.numberOfTable_tv.setText("Table: " + String.valueOf(currentOrder.getNumberOfTable()));
         holder.cost_tv.setText(String.valueOf(currentOrder.getCost()) + " $");
-        holder.status_tv.setText("Status: " + currentOrder.getStatus());
+        holder.status_tv.setText("Status: " + statusConverter(currentOrder.getStatus()));
         holder.id_tv.setText(String.valueOf(currentOrder.getId()));
 
     }
@@ -66,6 +68,37 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
             cost_tv = itemView.findViewById(R.id.cost_tv);
             status_tv = itemView.findViewById(R.id.status_tv);
             id_tv = itemView.findViewById(R.id.id_tv);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int position = getAdapterPosition();
+                    if (listener != null && position != RecyclerView.NO_POSITION)
+                        listener.onItemClick(orders.get(position));
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Order order);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    private String statusConverter (int value) {
+        switch (value) {
+            case 1:
+                return "Placed";
+            case 2:
+                return "Preparing";
+            case 3:
+                return "Out";
+            case 4:
+                return "Paid";
+        }
+        return "Error";
     }
 }

@@ -24,10 +24,10 @@ public class Order {
     private String timeOfPlaced;
     private int numberOfTable;
     private double cost;
-    private String status;
+    private int status;
 
     @Ignore
-    public Order(String dishes, int numberOfTable) {
+    public Order(String dishes, int numberOfTable, int status) {
         this.dishes = dishes;
         this.numberOfTable = numberOfTable;
 
@@ -35,10 +35,10 @@ public class Order {
         Date date = new Date();
         this.timeOfPlaced = formatter.format(date);
         this.cost = 12.0;
-        this.status = "Active";
+        this.status = status;
     }
 
-    public Order(String dishes, String timeOfPlaced, int numberOfTable, double cost, String status) {
+    public Order(String dishes, String timeOfPlaced, int numberOfTable, double cost, int status) {
         this.dishes = dishes;
         this.timeOfPlaced = timeOfPlaced;
         this.numberOfTable = numberOfTable;
@@ -105,15 +105,13 @@ public class Order {
         return cost;
     }
 
-    public void setCost(double cost) {
-        this.cost = cost;
-    }
+    public void setCost(double cost) { this.cost = cost; }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }

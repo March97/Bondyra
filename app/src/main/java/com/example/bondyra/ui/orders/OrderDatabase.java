@@ -44,9 +44,9 @@ public abstract class OrderDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            orderDao.insert(new Order("Dishes 1", "12.00.00", 1, 1.0, "Active"));
-            orderDao.insert(new Order("Dishes 2", "12.00.00", 1, 1.0, "Active"));
-            orderDao.insert(new Order("Dishes 3", "12.00.00", 1, 1.0, "Active"));
+            orderDao.insert(new Order("Dishes 1", "12.00.00", 1, 1.0, 1));
+            orderDao.insert(new Order("Dishes 2", "12.00.00", 1, 1.0, 1));
+            orderDao.insert(new Order("Dishes 3", "12.00.00", 1, 1.0, 1));
             return null;
         }
     }
