@@ -46,6 +46,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.OrderHolder>
         notifyDataSetChanged();
     }
 
+    public Order getOrderAt(int position) {
+        return orders.get(position);
+    }
+
     class OrderHolder extends RecyclerView.ViewHolder {
         private TextView dishes_tv;
         private TextView timeOfPlaced_tv;
