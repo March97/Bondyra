@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/dish_id_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/dish_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name:"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/dish_id_tv"
+            android:maxLines="1"/>
+
+        <TextView
+            android:id="@+id/dish_price_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="12.00"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:maxLines="1"
+            android:layout_below="@id/dish_name_tv"/>
+
+        <TextView
+            android:id="@+id/dish_mass_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="300g "
+            android:maxLines="1"
+            android:layout_below="@id/dish_price_tv"/>
+
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,6 +1,13 @@
-package com.example.bondyra.objects;
+package com.example.bondyra.ui.dishes;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "dish_table")
 public class Dish {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
 
     private String name;
     private double price;
@@ -11,6 +18,10 @@ public class Dish {
         this.price = price;
         this.mass = mass;
     }
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public String getName() {
         return name;

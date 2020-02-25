@@ -11,6 +11,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".ui.orders.AddOrderActivity"
             android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".ui.dishes.AddDishActivity"
+            android:parentActivityName=".MainActivity"></activity>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
