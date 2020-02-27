@@ -48,11 +48,6 @@ public class AddOrderActivity extends AppCompatActivity {
     public static final String EXTRA_TABLE =
             "com.example.bondyra.ui.orders.EXTRA_TABLE";
 
-    public static final String EXTRA_DISH_LIST =
-            "com.example.bondyra.ui.orders.EXTRA_DISH_LIST";
-
-    public static final String EXTRA_DISH_PRICE =
-            "com.example.bondyra.ui.orders.EXTRA_DISH_LIST";
 
     private EditText editTextDishes;
     private NumberPicker numberPickerTable;
@@ -121,6 +116,7 @@ public class AddOrderActivity extends AppCompatActivity {
             editTextDishes.setText(intent.getStringExtra(EXTRA_DISHES));
             numberPickerTable.setValue(intent.getIntExtra(EXTRA_TABLE, 1));
             numberPickerStatus.setValue(intent.getIntExtra(EXTRA_STATUS, 1));
+            cost = intent.getDoubleExtra(EXTRA_COST, 0.0);
 
 
         } else {
