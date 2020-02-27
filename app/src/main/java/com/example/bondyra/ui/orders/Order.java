@@ -38,6 +38,18 @@ public class Order {
         this.status = status;
     }
 
+    @Ignore
+    public Order(String dishes, int numberOfTable, int status, double cost) {
+        this.dishes = dishes;
+        this.numberOfTable = numberOfTable;
+        this.cost = cost;
+        this.status = status;
+
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        Date date = new Date();
+        this.timeOfPlaced = formatter.format(date);
+    }
+
     public Order(String dishes, String timeOfPlaced, int numberOfTable, double cost, int status) {
         this.dishes = dishes;
         this.timeOfPlaced = timeOfPlaced;

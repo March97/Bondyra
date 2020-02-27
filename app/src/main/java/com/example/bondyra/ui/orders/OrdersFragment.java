@@ -95,8 +95,9 @@ public class OrdersFragment extends Fragment {
             String dishes = data.getStringExtra(AddOrderActivity.EXTRA_DISHES);
             int table = data.getIntExtra(AddOrderActivity.EXTRA_TABLE, 1);
             int status = data.getIntExtra(AddOrderActivity.EXTRA_STATUS, 1);
+            double cost = data.getDoubleExtra(AddOrderActivity.EXTRA_COST, 0.0);
 
-            Order order = new Order(dishes, table, status);
+            Order order = new Order(dishes, table, status, cost);
             ordersViewModel.insert(order);
             Toast.makeText(getContext(), "Order saved", Toast.LENGTH_SHORT).show();
         } else if (requestCode == EDIT_ORDER_REQUEST && resultCode == RESULT_OK) {

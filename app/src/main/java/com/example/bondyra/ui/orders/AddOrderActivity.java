@@ -60,6 +60,8 @@ public class AddOrderActivity extends AppCompatActivity {
     private NumberPicker numberPickerStatus;
     private NumberPicker numberPickerDish;
     private String[] pickerVals;
+    private Button buttonAddDish;
+    private Double cost;
     //private String[] pickerValsDish;
 
     SharedPreferences sharedPreferences;
@@ -75,6 +77,8 @@ public class AddOrderActivity extends AppCompatActivity {
         buttonAdd = findViewById(R.id.add_order_btn);
         numberPickerStatus = findViewById(R.id.status_picker);
         numberPickerDish = findViewById(R.id.dish_picker);
+        buttonAddDish = findViewById(R.id.add_dish_to_order_btn);
+        cost = 0.0;
 
         numberPickerDish.setMinValue(1);
         //numberPickerDish.setMaxValue(Integer.valueOf(allDishes.getValue().size()));
@@ -91,8 +95,8 @@ public class AddOrderActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         sharedPreferences = getSharedPreferences("DISH_NAME", Context.MODE_PRIVATE);
-        ArrayList<String> dishesNames = new ArrayList<String>();
-        ArrayList<String> dishesPrices = new ArrayList<String>();
+        final ArrayList<String> dishesNames = new ArrayList<String>();
+        final ArrayList<String> dishesPrices = new ArrayList<String>();
         int arraySize = sharedPreferences.getInt("arraySize", 0);
         for (int i =0; i < arraySize; i++) {
             String keyName = "D ";
@@ -123,7 +127,18 @@ public class AddOrderActivity extends AppCompatActivity {
             setTitle("Add Order");
         }
 
+        buttonAddDish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String dishString = editTextDishes.getText().toString();
+                dishString += dishesNames.get(numberPickerDish.getValue() - 1);
+                dishString += "\n";
+                editTextDishes.setText(dishString);
 
+                cost += Double.valueOf(dishesPrices.get(numberPickerDish.getValue() - 1));
+                //price
+            }
+        });
 
         buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,6 +162,7 @@ public class AddOrderActivity extends AppCompatActivity {
         data.putExtra(EXTRA_DISHES, dishes);
         data.putExtra(EXTRA_TABLE, table);
         data.putExtra(EXTRA_STATUS, status);
+        data.putExtra(EXTRA_COST, cost);
 
         int id = getIntent().getIntExtra(EXTRA_ID, -1);
         if (id != -1) {
