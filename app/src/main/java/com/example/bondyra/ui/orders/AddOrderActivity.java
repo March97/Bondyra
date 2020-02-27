@@ -1,8 +1,15 @@
 package com.example.bondyra.ui.orders;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,8 +21,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.bondyra.R;
+import com.example.bondyra.ui.dishes.Dish;
+import com.example.bondyra.ui.dishes.DishRepository;
+import com.example.bondyra.ui.dishes.DishViewModel;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AddOrderActivity extends AppCompatActivity {
 
@@ -37,11 +48,22 @@ public class AddOrderActivity extends AppCompatActivity {
     public static final String EXTRA_TABLE =
             "com.example.bondyra.ui.orders.EXTRA_TABLE";
 
+    public static final String EXTRA_DISH_LIST =
+            "com.example.bondyra.ui.orders.EXTRA_DISH_LIST";
+
+    public static final String EXTRA_DISH_PRICE =
+            "com.example.bondyra.ui.orders.EXTRA_DISH_LIST";
+
     private EditText editTextDishes;
     private NumberPicker numberPickerTable;
     private Button buttonAdd;
     private NumberPicker numberPickerStatus;
+    private NumberPicker numberPickerDish;
     private String[] pickerVals;
+    //private String[] pickerValsDish;
+
+    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +74,14 @@ public class AddOrderActivity extends AppCompatActivity {
         numberPickerTable = findViewById(R.id.table_number_picker);
         buttonAdd = findViewById(R.id.add_order_btn);
         numberPickerStatus = findViewById(R.id.status_picker);
+        numberPickerDish = findViewById(R.id.dish_picker);
+
+        numberPickerDish.setMinValue(1);
+        //numberPickerDish.setMaxValue(Integer.valueOf(allDishes.getValue().size()));
 
         numberPickerTable.setMinValue(1);
         numberPickerTable.setMaxValue(10);
+
 
         pickerVals = new String[] {"Placed", "Preparing", "Out", "Paid"};
         numberPickerStatus.setMinValue(1);
@@ -62,6 +89,28 @@ public class AddOrderActivity extends AppCompatActivity {
         numberPickerStatus.setDisplayedValues(pickerVals);
 
         Intent intent = getIntent();
+
+        sharedPreferences = getSharedPreferences("DISH_NAME", Context.MODE_PRIVATE);
+        ArrayList<String> dishesNames = new ArrayList<String>();
+        ArrayList<String> dishesPrices = new ArrayList<String>();
+        int arraySize = sharedPreferences.getInt("arraySize", 0);
+        for (int i =0; i < arraySize; i++) {
+            String keyName = "D ";
+            String keyPrice = "P ";
+            keyName += i;
+            keyPrice += i;
+            System.out.println(keyName);
+            dishesNames.add(sharedPreferences.getString(keyName, ""));
+            dishesPrices.add(sharedPreferences.getString(keyPrice, "0"));
+            System.out.println(dishesNames.get(i));
+        }
+        String[] pickerValsDish = new String[dishesNames.size()];
+        pickerValsDish = dishesNames.toArray(pickerValsDish);
+        numberPickerDish.setMinValue(1);
+        numberPickerDish.setMaxValue(arraySize);
+        numberPickerDish.setDisplayedValues(pickerValsDish);
+
+
 
         if (intent.hasExtra(EXTRA_ID)) {
             setTitle("Edit Order");

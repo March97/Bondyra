@@ -1,6 +1,8 @@
 package com.example.bondyra.ui.dishes;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +19,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.bondyra.R;
+import com.example.bondyra.ui.orders.AddOrderActivity;
 import com.example.bondyra.ui.orders.Order;
 import com.example.bondyra.ui.orders.OrderAdapter;
 import com.example.bondyra.ui.orders.OrdersViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.app.Activity.RESULT_OK;
@@ -32,6 +36,8 @@ public class DishFragment extends Fragment {
     public static final int EDIT_DISH_REQUEST = 2;
 
     private DishViewModel dishViewModel;
+    private ArrayList<Dish> dishesList;
+    SharedPreferences sharedPreferences;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -57,9 +63,26 @@ public class DishFragment extends Fragment {
             @Override
             public void onChanged(List<Dish> dishes) {
                 adapter.setDishes(dishes);
+                sharedPreferences = getActivity().getSharedPreferences("DISH_NAME", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                dishesList = (ArrayList) dishes;
+                editor.putInt("arraySize", dishesList.size());
+                for(int i = 0; i < dishesList.size(); i++) {
+                    String keyName = "D ";
+                    String keyPrice = "P ";
+                    keyName += i;
+                    keyPrice += i;
+                    System.out.println(keyName);
+                    editor.putString(keyName, dishesList.get(i).getName());
+                    editor.putString(keyPrice, String.valueOf(dishesList.get(i).getPrice()));
+                    editor.commit();
+                }
+
                 Toast.makeText(getContext(), "onChanged", Toast.LENGTH_SHORT).show();
             }
         });
+
+
 
         new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 
@@ -74,6 +97,8 @@ public class DishFragment extends Fragment {
                 Toast.makeText(getContext(), "Dish deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
+
+
 
         adapter.setOnItemClickListener(new DishAdapter.OnItemClickListener() {
             @Override
